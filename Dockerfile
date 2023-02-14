@@ -4,7 +4,7 @@ ARG COMPLIANCE_VERSION=1.3.40
 ARG TERRAFORM_VERSION=1.0.11
 ARG TERRAGRUNT_VERSION=0.43.2
 # Update tests/container/terratest.yaml when bumping the go version
-ARG GO_VERSION=1.20.0
+ARG GO_VERSION=1.20
 ARG TERRAFORM_DOCS_VERSION=0.16.0
 ARG TFLINT_VERSION=0.45.0
 ARG TFMASK_VERSION=0.7.0
@@ -65,7 +65,7 @@ RUN  set -ex \
      && unzip tflint.zip \
      && chmod +x tflint \
      && mv tflint /usr/local/bin/tflint \
-	 && curl -L https://github.com/cloudposse/tfmask/releases/download/${TFMASK_VERSION}_linux_amd64 -o /usr/bin/tfmask \
+	&& curl -L https://github.com/cloudposse/tfmask/releases/download/${TFMASK_VERSION}_linux_amd64 -o /usr/bin/tfmask \
      && chmod +x /usr/bin/tfmask \
      && curl -LO https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
      && curl -LO https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl.sha256 \
