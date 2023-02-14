@@ -60,7 +60,7 @@ RUN  set -ex \
      && mv terraform-docs /usr/local/bin/terraform-docs \
      && wget --quiet "https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz" \
      && tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz \
-     && /usr/local/go/bin/go get  "golang.org/x/lint/golint" \
+     && /usr/local/go/bin/go install  "golang.org/x/lint/golint@latest" \
      && curl -L -o ./tflint.zip https://github.com/terraform-linters/tflint/releases/download/v${TFLINT_VERSION}/tflint_linux_amd64.zip \
      && unzip tflint.zip \
      && chmod +x tflint \
@@ -86,7 +86,7 @@ RUN  set -ex \
      && pip install terraform-compliance=="${COMPLIANCE_VERSION}" \
      && pip install pre-commit   \
      && pip install awscli \
-	 && pip install terraform_external_data \
+	&& pip install terraform_external_data \
      && pip install gnupg \
      && apt-get remove -y ${BUILD_DEPS} \
      && apt-get autoremove -y \
