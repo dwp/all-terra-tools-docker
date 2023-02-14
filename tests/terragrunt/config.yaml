@@ -5,7 +5,7 @@ commandTests:
   - name: go version
     command: go
     args: ["version"]
-    expectedOutput: ["go version go1.17.6"]
+    expectedOutput: ["go version go1.20"]
     exitCode: 0
   # Path set correctly
   - name: Path env var

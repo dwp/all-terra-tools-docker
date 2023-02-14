@@ -1,6 +1,6 @@
 module terragrunt
 
-go 1.17
+go 1.20
 
 require (
 	github.com/gruntwork-io/terratest v0.38.8
