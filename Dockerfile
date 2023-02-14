@@ -1,15 +1,15 @@
 FROM public.ecr.aws/ubuntu/ubuntu:20.04_stable
 
-ARG COMPLIANCE_VERSION=1.3.26
-ARG TERRAFORM_VERSION=0.14.11
-ARG TERRAGRUNT_VERSION=0.31.0
+ARG COMPLIANCE_VERSION=1.3.40
+ARG TERRAFORM_VERSION=1.0.11
+ARG TERRAGRUNT_VERSION=0.43.2
 # Update tests/container/terratest.yaml when bumping the go version
-ARG GO_VERSION=1.17.6
-ARG TERRAFORM_DOCS_VERSION=0.14.1
-ARG TFLINT_VERSION=0.30.0
+ARG GO_VERSION=1.20.0
+ARG TERRAFORM_DOCS_VERSION=0.16.0
+ARG TFLINT_VERSION=0.45.0
 ARG TFMASK_VERSION=0.7.0
 ARG KUBECTL_VERSION=v1.21.2
-ARG VAULT_VERSION=1.8.1
+ARG VAULT_VERSION=1.12.3
 
 ARG HASHICORP_PGP_KEY
 ARG TARGET_ARCH='linux_amd64'
@@ -22,7 +22,7 @@ ENV TARGET_ARCH="${TARGET_ARCH}"
 ENV HASHICORP_PGP_KEY="${HASHICORP_PGP_KEY}"
 ENV GO111MODULE=on
 ENV GOPATH=/root/go
-ENV TZ=Europe/Dublin
+ENV TZ=Europe/London
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/go/bin:/usr/local/go/bin"
 
@@ -47,7 +47,7 @@ RUN  set -ex \
      # && gpg --verify "${SHA256SUM_SIG_FILE_NAME}" "${SHA256SUM_FILE_NAME}" \
      && wget -q "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/${TERRAFORM_FILE_NAME}" \
      && grep "${TERRAFORM_FILE_NAME}" "${SHA256SUM_FILE_NAME}" > "${SHA256SUM_FILE_NAME_FOR_ARCH}" \
-     && wget --quiet "https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64" \
+     && wget "https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64" \
      && chmod +x terragrunt_linux_amd64 \
      && mv terragrunt_linux_amd64 /usr/local/bin/terragrunt \
      && ls -al . \
