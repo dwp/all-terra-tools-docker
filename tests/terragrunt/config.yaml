@@ -1,0 +1,19 @@
+schemaVersion: 2.0.0
+
+commandTests:
+  # Main binary can print its version
+  - name: go version
+    command: go
+    args: ["version"]
+    expectedOutput: ["go version go1.17.6"]
+    exitCode: 0
+  # Path set correctly
+  - name: Path env var
+    command: "echo"
+    args: [ "$PATH" ]
+    expectedOutput: [ ".*/usr/bin.*" ]
+  - name: terratest
+    setup: [[ "cp", "/tests/terragrunt/terragrunt_example_test.go", "/target/" ], ["cp", "/tests/terragrunt/go.mod", "/target" ], ["cp", "/tests/terragrunt/go.sum", "/target"]]
+    command: go
+    args: [ "test", "-v", "-timeout", "15m", "terragrunt_example_test.go" ]
+    exitCode: 0
