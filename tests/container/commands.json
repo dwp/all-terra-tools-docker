@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "2.0.0",
+  "commandTests": [
+    {
+      "name": "terraform installation",
+      "command": "which",
+      "args": [
+        "terraform"
+      ],
+      "expectedOutput": [
+        "/usr/bin/terraform"
+      ]
+    },
+    {
+        "name": "terragrunt installation",
+        "command": "which",
+        "args": [
+            "terragrunt"
+        ],
+        "expectedOutput": [
+            "/usr/local/bin/terragrunt"
+        ]
+    },
+    {
+        "name": "terracompliance installation",
+        "command": "which",
+        "args": [
+            "terraform-compliance"
+        ],
+        "expectedOutput": [
+            "/usr/local/bin/terraform-compliance"
+        ]
+    },
+    {
+        "name": "tflint installation",
+        "command": "which",
+        "args": [
+            "tflint"
+        ],
+        "expectedOutput": [
+            "/usr/local/bin/tflint"
+        ]
+    },
+    {
+        "name": "go installation",
+        "command": "which",
+        "args": [
+            "go"
+        ],
+        "expectedOutput": [
+            "/usr/local/go/bin/go"
+        ]
+    },
+    {
+        "name": "gpg installation",
+        "command": "which",
+        "args": [
+            "gpg"
+        ],
+        "expectedOutput": [
+            "/usr/bin/gpg"
+        ]
+    },
+    {
+      "name": "terraform docs installation",
+      "command": "which",
+      "args": [
+        "terraform-docs"
+      ],
+      "expectedOutput": [
+        "/usr/local/bin/terraform-docs"
+      ]
+    },
+    {
+      "name": "tfmask installation",
+      "command": "which",
+      "args": [
+        "tfmask"
+      ],
+      "expectedOutput": [
+        "/usr/bin/tfmask"
+      ]
+    },
+    {
+      "name": "kubectl installation",
+      "command": "which",
+      "args": [
+        "kubectl"
+      ],
+      "expectedOutput": [
+        "/usr/local/bin/kubectl"
+      ]
+    }
+  ]
+}
