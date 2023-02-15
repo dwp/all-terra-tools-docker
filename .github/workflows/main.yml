@@ -72,7 +72,7 @@ jobs:
           tags: dwpdigital/all-terra-tools-docker:${{ needs.get-publish-version.outputs.publish-version }},dwpdigital/all-terra-tools-docker:latest
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            HASHICORP_PGP_KEY=${{ secrets.HASHICORP_PGP_KEY }}
+            HASHICORP_PGP_KEY="${{ secrets.HASHICORP_PGP_KEY }}"
 
       - name: Create version file
         run: |
