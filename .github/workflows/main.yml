@@ -72,8 +72,8 @@ jobs:
           tags: dwpdigital/all-terra-tools-docker:${{ needs.get-publish-version.outputs.publish-version }},dwpdigital/all-terra-tools-docker:latest
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            export DOCKER_BUILDKIT=0
-            export COMPOSE_DOCKER_CLI_BUILD=0
+            DOCKER_BUILDKIT=0
+            COMPOSE_DOCKER_CLI_BUILD=0
 
       - name: Create version file
         run: |
