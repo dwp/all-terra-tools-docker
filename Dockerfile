@@ -11,15 +11,15 @@ ARG TFMASK_VERSION=0.7.0
 ARG KUBECTL_VERSION=v1.21.2
 ARG VAULT_VERSION=1.12.3
 
-ARG HASHICORP_PGP_KEY
 ARG TARGET_ARCH='linux_amd64'
 
 LABEL terraform_compliance.version="${COMPLIANCE_VERSION}"
 LABEL terraform.version="${TERRAFORM_VERSION}"
 LABEL terragrunt.version="${TERRAGRUNT_VERSION}"
 
+COPY hashicorp-pgp-key.pub /tmp
+
 ENV TARGET_ARCH="${TARGET_ARCH}"
-ENV HASHICORP_PGP_KEY="${HASHICORP_PGP_KEY}"
 ENV GO111MODULE=on
 ENV GOPATH=/root/go
 ENV TZ=Europe/London
@@ -36,13 +36,13 @@ RUN  set -ex \
      && SHA256SUM_FILE_NAME="terraform_${TERRAFORM_VERSION}_SHA256SUMS" \
      && SHA256SUM_SIG_FILE_NAME="terraform_${TERRAFORM_VERSION}_SHA256SUMS.sig" \
      && SHA256SUM_FILE_NAME_FOR_ARCH="${SHA256SUM_FILE_NAME}.${TARGET_ARCH}" \
-     && HASHICORP_PGP_KEY_FILE='hashicorp-pgp-key.pub' \
+     && HASHICORP_PGP_KEY_FILE='/tmp/hashicorp-pgp-key.pub' \
      && OLD_BASEDIR="$(pwd)" \
      && TMP_DIR=$(mktemp -d) \
      && cd "${TMP_DIR}" \
-     && echo "${HASHICORP_PGP_KEY}" > "${HASHICORP_PGP_KEY_FILE}" \
      && wget -q "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/${SHA256SUM_FILE_NAME}" \
      && wget -q "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/${SHA256SUM_SIG_FILE_NAME}" \
+     && chmod 750 "${HASHICORP_PGP_KEY_FILE}" \
      && gpg --import "${HASHICORP_PGP_KEY_FILE}" \
      # && gpg --verify "${SHA256SUM_SIG_FILE_NAME}" "${SHA256SUM_FILE_NAME}" \
      && wget -q "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/${TERRAFORM_FILE_NAME}" \
